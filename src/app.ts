@@ -27,6 +27,13 @@ app.get('/access-token', cors(corsOptions), (_req, res) => {
   res.send(spotifyApi._credentials.accessToken)
 });
 
+app.get('/artists/:searchTerm', cors(corsOptions), (req, res) => {
+  const query = req.params.searchTerm;
+  spotifyApi.searchArtists(query).then((data) => {
+    res.send(data.body.artists)
+  });
+});
+
 app.listen(PORT, () => {
   return console.log(`Listening on port ${PORT}`);
 });
