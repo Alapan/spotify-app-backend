@@ -34,6 +34,13 @@ app.get('/artists/:searchTerm', cors(corsOptions), (req, res) => {
   });
 });
 
+app.get('/artists/tracks/:artistId', cors(corsOptions), (req, res) => {
+  const artistId = req.params.artistId;
+  spotifyApi.getArtistTopTracks(artistId, 'US').then((data) => {
+    res.send(data.body.tracks);
+  });
+});
+
 app.listen(PORT, () => {
   return console.log(`Listening on port ${PORT}`);
 });
